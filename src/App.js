@@ -3,13 +3,20 @@ import PostPageHome from './views/PostPageHome';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SignUpPage from './views/SignUpPage';
 import LoginPage from './views/LoginPage';
+import PostPageAdd from './views/PostPageAdd';
+import PostPageDetails from './views/PostPageDetails';
+import PostPageUpdate from './views/PostPageUpdate';
+
 
 function App() {
 
   const router = createBrowserRouter([
     {path: "/", element : <PostPageHome />},
     {path: "/login", element : <LoginPage />},
-    {path: "/signup", element: <SignUpPage />}
+    {path: "/signup", element: <SignUpPage />},
+    {path: "/add", element : <PostPageAdd />},
+    {path: "/post/:id", element : <PostPageDetails />},
+    {path: "/update/:id", element : <PostPageUpdate />}
   ])
   return (
     <RouterProvider router={router} />
