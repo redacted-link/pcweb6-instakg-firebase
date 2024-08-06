@@ -12,13 +12,14 @@ export default function PostPageAdd() {
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage]= useState("https://picsum.photos/id/10/600");
+  const [imageName, setImageName]= useState("")
   const navigate= useNavigate();
 
   async function addPost() {
     const imageReference= ref(storage, `images/${image.name}`);
     const response= await uploadBytes(imageReference,image);
     const imageUrl= await getDownloadURL(response.ref);
-    await addDoc(collection(db, "posts"), {caption, image: imageUrl});
+    await addDoc(collection(db, "posts"), {caption, image: imageUrl, imageName: imageName});
     navigate("/")
   }
 
@@ -58,7 +59,8 @@ export default function PostPageAdd() {
                 const imageFile= e.target.files[0];
                 const previewImage = URL.createObjectURL(imageFile);
                 setImage(imageFile);
-                setPreviewImage(previewImage)}}
+                setPreviewImage(previewImage);
+                setImageName(imageFile.name)}}
             />
             <Form.Text className="text-muted">
               Make sure the url has a image type at the end: jpg, jpeg, png.
